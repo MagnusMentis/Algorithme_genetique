@@ -1,10 +1,10 @@
 import numpy as np
 
-def fusion (matrice):
+def fusion (matrice): #tableau de vecteurs lignes
     new_image=[]
-    new_image=np.mean(matrice,axis=0) #fais la moyenne des lignes de la matrice 
+    new_image=np.mean(matrice,axis=1) #fais la moyenne des colonnes de la matrice 
     return new_image
-#On fait la moyene de chaque ligne de la matrice pour ne former qu'un seul vecteur
+#On fait la moyene de chaque colonnes de la matrice pour ne former qu'un seul vecteur
 
 def mutation(vecteur, nb_variants, taux_mutation, niveau_mutation):
     vecteurs_mutes=[]
@@ -12,11 +12,11 @@ def mutation(vecteur, nb_variants, taux_mutation, niveau_mutation):
         vect_mutation=vecteur.copy()
         mute=np.random.rand(len(vecteur)) #variable aléatoire entre 0 et 1, elles representes les valeurs qui seront mutés si < taux de mutation
         bruit=np.random.normal(0,niveau_mutation, len(vecteur))#petite variable representant la mutation entre 0 et niveau de mutation 
-        for i in range(len(vecteur)):
-            if mute[i]<taux_mutation:
-                vect_mutation[i]+=bruit[i] #on ajoute la mutation a la valeur de l'indice où survient une mutation
+        for j in range(len(vecteur)):
+            if mute[j]<taux_mutation:
+                vect_mutation[j]+=bruit[j] #on ajoute la mutation a la valeur de l'indice où survient une mutation
             else:
-                i=i+1
+                j=j+1
         vecteurs_mutes.append(vect_mutation)#On crée une liste de vecteur mutés
     return np.array(vecteurs_mutes)
 #Mute est une liste de meme taille que le vecteur, les valeurs de chacunes de ses cases seront générés aléatoirement et comprises entre 0 et 1 
